@@ -13,8 +13,9 @@ pipeline {
         }
         stage('Push to Docker Hub') {
             steps {
-                withDockerRegistry(credentialsId: 'myserverd') {
-                    sh 'docker push adeeti-jwellers'
+                withDockerRegistry(url: 'https://index.docker.io/v1/', credentialsId: 'myserverd') {
+                    sh 'docker tag adeeti-jwellers myusername/adeeti-jwellers:latest'
+                    sh 'docker push myusername/adeeti-jwellers:latest'
                 }
             }
         }
